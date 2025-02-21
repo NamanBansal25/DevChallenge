@@ -4,7 +4,7 @@ export function OPTIONS() {
   return NextResponse.json({}, {
     status: 200,
     headers: {
-      "Access-Control-Allow-Origin": "*", // Allow all origins
+      "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type",
     },
@@ -24,6 +24,7 @@ export async function GET() {
 
 export async function POST(req) {
   try {
+    // Parse the incoming request JSON
     const body = await req.json();
     const { data } = body;
 
@@ -41,14 +42,17 @@ export async function POST(req) {
       );
     }
 
+    // Process numbers and alphabets
     const numbers = data.filter((item) => !isNaN(item));
     const alphabets = data.filter((item) => /^[A-Za-z]$/.test(item));
 
+    // Get the highest alphabet
     const highest_alphabet =
       alphabets.length > 0
         ? [alphabets.sort((a, b) => b.localeCompare(a)).pop()]
         : [];
 
+    // Return the response
     return new Response(
       JSON.stringify({
         is_success: true,
