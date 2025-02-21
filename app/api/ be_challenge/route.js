@@ -1,19 +1,24 @@
 import { NextResponse } from "next/server";
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",  // Allow all origins
-  "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type",
-};
-
-export async function OPTIONS() {
-  return NextResponse.json({}, { status: 200, headers: corsHeaders });
+export function OPTIONS() {
+  return NextResponse.json({}, {
+    status: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "*", // Allow all origins
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+    },
+  });
 }
 
-export async function GET(req) {
+export async function GET() {
   return new Response(JSON.stringify({ operation_code: 1 }), {
     status: 200,
-    headers: corsHeaders,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+    },
   });
 }
 
@@ -25,12 +30,19 @@ export async function POST(req) {
     if (!Array.isArray(data)) {
       return new Response(
         JSON.stringify({ is_success: false, message: "Invalid input format" }),
-        { status: 400, headers: corsHeaders }
+        {
+          status: 400,
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type",
+          },
+        }
       );
     }
 
-    const numbers = data.filter(item => !isNaN(item));
-    const alphabets = data.filter(item => /^[A-Za-z]$/.test(item));
+    const numbers = data.filter((item) => !isNaN(item));
+    const alphabets = data.filter((item) => /^[A-Za-z]$/.test(item));
 
     const highest_alphabet =
       alphabets.length > 0
@@ -47,12 +59,26 @@ export async function POST(req) {
         alphabets,
         highest_alphabet,
       }),
-      { status: 200, headers: corsHeaders }
+      {
+        status: 200,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type",
+        },
+      }
     );
   } catch (error) {
     return new Response(
       JSON.stringify({ is_success: false, message: "Internal server error" }),
-      { status: 500, headers: corsHeaders }
+      {
+        status: 500,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type",
+        },
+      }
     );
   }
 }
