@@ -62,7 +62,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-6">
-      <h1 className="text-3xl font-bold mb-4">ABCD123</h1>
+      <h1 className="text-3xl font-bold mb-4">2237882</h1>
       <label className="font-semibold mb-2">API Input:</label>
       <textarea
         className="w-full max-w-lg p-3 border rounded-lg shadow-sm"
