@@ -27,6 +27,7 @@ export default function Home() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(parsedInput),
+        mode: "cors",
       });
 
       if (!res.ok) throw new Error("Failed to fetch response from server");
