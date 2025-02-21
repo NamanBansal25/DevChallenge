@@ -21,7 +21,7 @@ export default function Home() {
         throw new Error("Invalid JSON format. Must contain 'data' as an array.");
       }
 
-      const res = await fetch("https://your-vercel-project.vercel.app/api/be_challenge", {
+      const res = await fetch("https://dev-challenge-naman25.vercel.app/api/be_challenge", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
